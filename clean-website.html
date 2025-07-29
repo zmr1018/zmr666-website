@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研学设计——校企合作平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.loli.net/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link href="https://fonts.loli.net/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <link href="https://fonts.loli.net/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <link href="https://fonts.loli.net/css2?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="config.js"></script>
+</head>
+<body>
+    <!-- 页面加载动画 -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="images/logo2.png" alt="logo" style="width: 200px; height: 100px; object-fit: contain;">
+                <h2>研学设计</h2>
+                <span>校企合作平台</span>
+            </div>
+            <div class="loading-spinner"></div>
+            <p>正在加载中...</p>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="images/logo2.png" alt="logo" class="nav-logo-img" style="width: 150px; height: 50px; object-fit: contain;">
+                <div class="nav-logo">
+                    <h2>研学设计</h2>
+                    <span>校企合作平台</span>
+                </div>
+            </div>
+            <div class="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#enterprises">合作企业</a></li>
+                    <li><a href="#universities">大学资源</a></li>
+                    <li><a href="#advantages">特色优势</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" placeholder="搜索..." class="search-input">
+                    <button class="search-btn" aria-label="搜索">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <a href="#contact" class="nav-cta-btn">立即合作</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主页横幅 -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-carousel"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-main">
+                <h1 class="hero-title">研学设计</h1>
+                <div class="hero-subtitle-container">
+                    <p class="hero-subtitle">校企合作平台</p>
+                    <div class="hero-subtitle-right">
+                        <p class="hero-subtitle-text">搭建研学旅游企业与地理专业人才的桥梁，实现校企资源精准对接</p>
+                        <p class="hero-subtitle-text">推动研学旅游行业高质量发展，促进国内学校研学资源建设与开发</p>
+                    </div>
+                </div>
+                <div class="hero-description-container">
+                    <p class="hero-description">为研学旅游企业定向提供对口地理专业在校优质专业学生资源</p>
+                    <p class="hero-description">推动校企合作开发高质量研学设计</p>
+                </div>
+                <div class="hero-actions">
+                    <a href="https://www.snsy.edu.cn/" target="_blank" class="btn-primary">了解更多</a>
+                    <a href="#contact" class="btn-primary">立即合作</a>
+                </div>
+            </div>
+            <div class="hero-graphic">
+                <div class="hero-nft-image">
+                    <div class="nft-layer nft-layer-1"></div>
+                    <div class="nft-layer nft-layer-2"></div>
+                    <img src="images/zmr.jpg" alt="NFT风格头像" class="nft-portrait">
+                </div>
+            </div>
+        </div>
+        <div class="hero-signature">陕西学前师范学院 朱旻睿制作</div>
+    </section>
+
+    <!-- 特色功能 -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">我们的特色</h2>
+                <p class="section-subtitle">专业的研学设计服务，助力校企合作发展</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>校企合作</h3>
+                    <p>搭建企业与高校的桥梁，实现资源精准对接，共创研学旅游新未来</p>
+                    <div class="feature-highlights">
+                        <div class="highlight-item">专业对接</div>
+                        <div class="highlight-item">资源共享</div>
+                        <div class="highlight-item">互利共赢</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>人才培养</h3>
+                    <p>为研学旅游企业定向培养高素质地理专业人才，提供专业培训服务</p>
+                    <div class="feature-highlights">
+                        <div class="highlight-item">定向培养</div>
+                        <div class="highlight-item">专业培训</div>
+                        <div class="highlight-item">实践教学</div>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>创新设计</h3>
+                    <p>结合地理专业知识，创新设计研学旅游产品，提升行业竞争力</p>
+                    <div class="feature-highlights">
+                        <div class="highlight-item">创新理念</div>
+                        <div class="highlight-item">专业设计</div>
+                        <div class="highlight-item">品质保证</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作模式 -->
+    <section class="cooperation" id="cooperation">
+        <div class="container">
+            <div class="cooperation-content">
+                <div class="cooperation-text">
+                    <h3>合作模式</h3>
+                    <p>我们提供多种灵活的合作模式，满足不同企业的需求：</p>
+                    <ul>
+                        <li>研学产品设计合作</li>
+                        <li>人才培养项目合作</li>
+                        <li>实习就业基地建设</li>
+                        <li>科研项目联合开发</li>
+                    </ul>
+                </div>
+                <div class="cooperation-modes">
+                    <div class="mode-item">
+                        <i class="fas fa-palette"></i>
+                        <span>产品设计</span>
+                        <span class="item-desc">专业研学产品设计服务</span>
+                    </div>
+                    <div class="mode-item">
+                        <i class="fas fa-users"></i>
+                        <span>人才培养</span>
+                        <span class="item-desc">定向培养专业人才</span>
+                    </div>
+                    <div class="mode-item">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>基地建设</span>
+                        <span class="item-desc">实习就业基地建设</span>
+                    </div>
+                    <div class="mode-item">
+                        <i class="fas fa-flask"></i>
+                        <span>科研合作</span>
+                        <span class="item-desc">联合科研项目开发</span>
+                    </div>
+                    <div class="mode-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>市场拓展</span>
+                        <span class="item-desc">市场调研与拓展</span>
+                    </div>
+                </div>
+                <div class="advantages-list">
+                    <div class="advantage-item">
+                        <i class="fas fa-trophy"></i>
+                        <span>众多全国研学设计大赛获奖作品</span>
+                        <a href="images/jx.jpg" target="_blank" class="view-textbook-btn">
+                            <span>查看作品</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="advantage-item">
+                        <i class="fas fa-clock"></i>
+                        <span>快速响应，专业服务</span>
+                    </div>
+                    <div class="advantage-item">
+                        <i class="fas fa-star"></i>
+                        <span>品质保证，信誉至上</span>
+                    </div>
+                    <div class="advantage-item">
+                        <i class="fas fa-bullseye"></i>
+                        <span>精准定位，高效对接</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作保障 -->
+    <section class="cooperation-guarantee">
+        <div class="container">
+            <h3>合作保障</h3>
+            <div class="guarantee-items">
+                <div class="guarantee-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <div class="guarantee-content">
+                        <h4>质量保障</h4>
+                        <p>严格的质量控制体系，确保每个项目都达到专业标准</p>
+                    </div>
+                </div>
+                <div class="guarantee-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="guarantee-content">
+                        <h4>时间保障</h4>
+                        <p>按时交付，确保项目进度，不延误企业计划</p>
+                    </div>
+                </div>
+                <div class="guarantee-item">
+                    <i class="fas fa-handshake"></i>
+                    <div class="guarantee-content">
+                        <h4>服务保障</h4>
+                        <p>全程跟踪服务，及时响应需求，提供专业支持</p>
+                    </div>
+                </div>
+                <div class="guarantee-item">
+                    <i class="fas fa-certificate"></i>
+                    <div class="guarantee-content">
+                        <h4>资质保障</h4>
+                        <p>具备相关专业资质，确保合作合法合规</p>
+                    </div>
+                </div>
+                <div class="guarantee-item">
+                    <i class="fas fa-users"></i>
+                    <div class="guarantee-content">
+                        <h4>团队保障</h4>
+                        <p>专业团队支持，确保项目顺利实施</p>
+                    </div>
+                </div>
+                <div class="guarantee-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <div class="guarantee-content">
+                        <h4>效果评估</h4>
+                        <p>定期评估合作效果，持续优化改进</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 设计成果 -->
+    <section class="cooperation-achievements">
+        <div class="container">
+            <h3>设计成果</h3>
+            <div class="achievements-grid">
+                <div class="achievement-stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">完成设计</div>
+                    <div class="stat-desc">成功完成研学设计项目50余个</div>
+                </div>
+                <div class="achievement-stat">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">成功案例</div>
+                    <div class="stat-desc">设计成功获奖案例20余个</div>
+                </div>
+                <div class="achievement-stat">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">培养人才</div>
+                    <div class="stat-desc">为企业培养高素质专业人才100余人</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作企业 -->
+    <section class="enterprises" id="enterprises">
+        <div class="container">
+            <h2 class="section-title">合作企业</h2>
+            <div class="enterprises-grid">
+                <div class="enterprise-card">
+                    <div class="enterprise-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>研学旅游企业</h3>
+                    <p>为研学旅游企业提供专业的设计服务和人才培养支持</p>
+                </div>
+                <div class="enterprise-card">
+                    <div class="enterprise-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h3>地理信息企业</h3>
+                    <p>与地理信息企业合作，开发创新研学产品</p>
+                </div>
+                <div class="enterprise-card">
+                    <div class="enterprise-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>教育培训机构</h3>
+                    <p>为教育培训机构提供专业的研学设计服务</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 大学资源 -->
+    <section class="universities" id="universities">
+        <div class="container">
+            <div class="universities-content">
+                <div class="university-main">
+                    <h3>大学资源</h3>
+                    <p>依托陕西学前师范学院地理科学专业，拥有丰富的教学资源和专业师资力量</p>
+                    <div class="resource-stats">
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">专业教师</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">1000+</div>
+                            <div class="stat-label">在校学生</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">合作项目</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="university-features">
+                    <div class="feature">
+                        <i class="fas fa-book"></i>
+                        <div class="feature-text">
+                            <h4>专业课程</h4>
+                            <p>地理科学、旅游管理等相关专业课程体系</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-laptop"></i>
+                        <div class="feature-text">
+                            <h4>实践教学</h4>
+                            <p>丰富的实践教学资源和实习基地</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-award"></i>
+                        <div class="feature-text">
+                            <h4>科研成果</h4>
+                            <p>多项科研成果和教学成果奖</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 资源服务 -->
+    <section class="resources" id="resources">
+        <div class="container">
+            <h2 class="section-title">资源服务</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>人才推荐</h3>
+                    <p>为合作企业推荐优秀的专业人才</p>
+                    <a href="#contact" class="resource-btn">
+                        <span>了解更多</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>创意设计</h3>
+                    <p>提供创新的研学产品设计方案</p>
+                    <a href="#contact" class="resource-btn">
+                        <span>了解更多</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>市场调研</h3>
+                    <p>专业的市场调研和分析服务</p>
+                    <a href="#contact" class="resource-btn">
+                        <span>了解更多</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>培训服务</h3>
+                    <p>为企业和学生提供专业培训</p>
+                    <a href="#contact" class="resource-btn">
+                        <span>了解更多</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>合作对接</h3>
+                    <p>搭建校企合作桥梁，促进资源对接</p>
+                    <a href="#contact" class="resource-btn">
+                        <span>了解更多</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>技术支持</h3>
+                    <p>提供专业的技术支持和咨询服务</p>
+                    <a href="#contact" class="resource-btn">
+                        <span>了解更多</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 团队介绍 -->
+    <section class="team" id="team">
+        <div class="container">
+            <h2 class="section-title">团队介绍</h2>
+            <div class="team-content">
+                <div class="team-member member-zhuminrui">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>朱旻睿</h3>
+                    <div class="member-title">项目负责人</div>
+                    <div class="member-description">
+                        陕西学前师范学院地理科学专业学生，专注于研学设计项目开发，具有丰富的项目经验和创新思维。
+                    </div>
+                </div>
+                <div class="team-member member-renying">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>任莹</h3>
+                    <div class="member-title">设计总监</div>
+                    <div class="member-description">
+                        负责研学产品的创意设计和方案制定，具有深厚的地理专业背景和丰富的设计经验。
+                    </div>
+                </div>
+                <div class="team-member member-wangyuqing">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>王昱清</h3>
+                    <div class="member-title">技术专家</div>
+                    <div class="member-description">
+                        专注于地理信息技术应用，为研学产品提供技术支持和创新解决方案。
+                    </div>
+                </div>
+                <div class="team-member member-tanghanjie">
+                    <div class="member-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>唐汉杰</h3>
+                    <div class="member-title">市场总监</div>
+                    <div class="member-description">
+                        负责市场调研和客户关系维护，确保项目顺利实施和客户满意度。
+                    </div>
+                </div>
+                <div class="team-member zytd-bg">
+                    <div class="member-avatar">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>专业团队</h3>
+                    <div class="member-title">核心团队</div>
+                    <div class="member-description">
+                        由地理科学、旅游管理、设计艺术等专业学生组成的核心团队，具备全面的专业能力。
+                    </div>
+                </div>
+                <div class="team-member hzds-bg">
+                    <div class="member-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>合作导师</h3>
+                    <div class="member-title">指导老师</div>
+                    <div class="member-description">
+                        由学院专业教师组成的导师团队，为项目提供专业指导和技术支持。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 特色优势 -->
+    <section class="advantages" id="advantages">
+        <div class="container">
+            <h2 class="section-title">特色优势</h2>
+            <div class="advantages-content">
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="advantage-text">
+                        <h3>专业背景</h3>
+                        <p>依托地理科学专业，具备深厚的学科背景和专业知识</p>
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="advantage-text">
+                        <h3>创新思维</h3>
+                        <p>结合现代教育理念，创新设计研学产品和服务</p>
+                    </div>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="advantage-text">
+                        <h3>服务保障</h3>
+                        <p>提供全程跟踪服务，确保项目质量和客户满意度</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>邮箱</h4>
+                            <p>1521732626@qq.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>电话</h4>
+                            <p>+86 152-1732-6260</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>地址</h4>
+                            <p>陕西省西安市长安区陕西学前师范学院</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="您的邮箱" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="subject" placeholder="主题" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="您的消息" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <span>发送消息</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 加入我们 -->
+    <section class="join-us-section">
+        <div class="join-us-container">
+            <h2 class="join-us-title">加入我们</h2>
+            <p class="join-us-desc">欢迎有志于研学设计的学生加入我们的团队</p>
+            <form class="join-us-form" id="joinUsForm">
+                <input type="text" name="name" placeholder="姓名" required>
+                <input type="text" name="studentid" placeholder="学籍" required>
+                <input type="email" name="account" placeholder="账号（QQ邮箱）" required>
+                <input type="tel" name="phone" placeholder="手机号码" required>
+                <textarea name="introduction" placeholder="自我介绍" rows="4" required></textarea>
+                <button type="submit" class="join-us-btn">
+                    <span>注册</span>
+                    <i class="fas fa-user-plus"></i>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>研学设计</h3>
+                    <p>搭建企业与高校的桥梁，实现资源精准对接，共创研学旅游新未来</p>
+                </div>
+                <div class="footer-section">
+                    <h3>联系方式</h3>
+                    <p>邮箱：1521732626@qq.com</p>
+                    <p>电话：+86 152-1732-6260</p>
+                    <p>地址：陕西省西安市长安区陕西学前师范学院</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#enterprises">合作企业</a></li>
+                        <li><a href="#universities">大学资源</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>关注我们</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 研学设计. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部 -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

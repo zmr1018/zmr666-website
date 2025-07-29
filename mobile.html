@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研学设计——移动端预览</title>
+    <link href="https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.loli.net/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+    <link href="https://fonts.loli.net/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <link href="https://fonts.loli.net/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <link href="https://fonts.loli.net/css2?family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <style>
+        /* 移动端专用样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .container {
+            max-width: 375px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            max-width: 375px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo-img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-logo h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .nav-logo span {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin: 0;
+        }
+
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            z-index: 1001;
+            width: 24px;
+            height: 20px;
+            position: relative;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #2c3e50;
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 9px; }
+        .hamburger span:nth-child(3) { top: 18px; }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            max-width: 375px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            padding: 20px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-menu.active {
+            display: block;
+        }
+
+        .nav-menu li {
+            display: block;
+            margin: 0;
+            padding: 15px 40px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            list-style: none;
+        }
+
+        .nav-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .nav-menu a {
+            font-size: 1.1rem;
+            padding: 0;
+            color: #2c3e50;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* 首页 */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .hero-description {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a90e2 0%, #357ab7 100%);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+        }
+
+        /* 核心优势 */
+        .features {
+            padding: 40px 20px;
+            background: white;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #4a90e2 0%, #357ab7 50%, #9b59b6 100%);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: #5a6c7d;
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #ffffff 0%, #fafbfc 100%);
+            border-radius: 15px;
+            padding: 25px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4a90e2 0%, #357ab7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: #5a6c7d;
+            line-height: 1.5;
+        }
+
+        /* 校企合作 */
+        .cooperation {
+            padding: 40px 20px;
+            background: #f8f9fa;
+        }
+
+        .cooperation-modes {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .mode-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mode-item i {
+            font-size: 1.8rem;
+            color: #4a90e2;
+            width: 40px;
+            text-align: center;
+        }
+
+        .mode-item span:not(.item-desc) {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .item-desc {
+            font-size: 0.8rem;
+            color: #5a6c7d;
+            line-height: 1.4;
+        }
+
+        /* 合作企业 */
+        .enterprises {
+            padding: 40px 20px;
+            background: white;
+        }
+
+        .enterprises-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .enterprise-card {
+            background: linear-gradient(145deg, #ffffff 0%, #fafbfc 100%);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .enterprise-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4a90e2 0%, #357ab7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .enterprise-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .enterprise-card p {
+            font-size: 0.8rem;
+            color: #5a6c7d;
+            line-height: 1.4;
+        }
+
+        /* 联系我们 */
+        .contact {
+            padding: 40px 20px;
+            background: #f8f9fa;
+        }
+
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+        }
+
+        .contact-item i {
+            font-size: 1.8rem;
+            color: #4a90e2;
+        }
+
+        .contact-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .contact-item p {
+            font-size: 0.8rem;
+            color: #5a6c7d;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4a90e2;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* 页脚 */
+        .footer {
+            padding: 30px 20px;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .footer-section p,
+        .footer-section li {
+            font-size: 0.8rem;
+            color: #bdc3c7;
+            line-height: 1.5;
+            margin-bottom: 5px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #4a90e2;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #4a90e2;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            font-size: 0.7rem;
+            color: #95a5a6;
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #4a90e2 0%, #357ab7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+        }
+
+        /* 移动端优化 */
+        .btn-primary,
+        .btn-secondary,
+        .back-to-top {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* 设备模拟器样式 */
+        .device-frame {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 9999;
+        }
+
+        .device-frame .container {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .device-info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            z-index: 9999;
+        }
+
+        /* 横屏提示 */
+        .landscape-warning {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #2c3e50;
+            color: white;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .landscape-warning i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        @media (orientation: landscape) and (max-height: 500px) {
+            .landscape-warning {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 横屏提示 -->
+    <div class="landscape-warning">
+        <div>
+            <i class="fas fa-mobile-alt"></i>
+            <h3>请旋转设备</h3>
+            <p>为了获得最佳体验，请将设备旋转为竖屏模式</p>
+        </div>
+    </div>
+
+    <!-- 设备信息 -->
+    <div class="device-info">
+        <div>移动端预览模式</div>
+        <div>屏幕宽度: <span id="screen-width">375px</span></div>
+    </div>
+
+    <!-- 设备框架 -->
+    <div class="device-frame">
+        <div class="container">
+            <!-- 导航栏 -->
+            <nav class="navbar">
+                <div class="nav-container">
+                    <div class="nav-brand">
+                        <img src="https://via.placeholder.com/150x50/007bff/ffffff?text=研学设计" alt="logo" class="nav-logo-img">
+                        <div class="nav-logo">
+                            <h2>研学设计</h2>
+                            <span>校企合作平台</span>
+                        </div>
+                    </div>
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#enterprises">合作企业</a></li>
+                    <li><a href="#universities">大学资源</a></li>
+                    <li><a href="#advantages">特色优势</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+
+            <!-- 主页横幅 -->
+            <section class="hero" id="home">
+                <div class="hero-content">
+                    <h1 class="hero-title">研学设计</h1>
+                    <p class="hero-subtitle">校企合作平台</p>
+                    <p class="hero-description">搭建研学旅游企业与地理专业人才的桥梁</p>
+                    <p class="hero-description">实现校企资源精准对接</p>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn-primary">立即合作</a>
+                        <a href="#features" class="btn-primary">了解更多</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 核心优势 -->
+            <section class="features" id="features">
+                <h2 class="section-title">核心优势</h2>
+                <p class="section-subtitle">专业的地理研学服务，助力企业创新发展</p>
+                <div class="features-grid">
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>人才推荐</h3>
+                        <p>精准匹配地理专业人才，为企业提供优质人力资源</p>
+                    </div>
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>研学规划</h3>
+                        <p>专业的研学路线设计和产品开发服务</p>
+                    </div>
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>设计服务</h3>
+                        <p>专业的研学路线和衍生产品设计服务</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 校企合作 -->
+            <section class="cooperation" id="cooperation">
+                <h2 class="section-title">校企合作</h2>
+                <p class="section-subtitle">搭建企业与高校的桥梁，实现资源精准对接</p>
+                <div class="cooperation-modes">
+                    <div class="mode-item fade-in-up">
+                        <i class="fas fa-user-graduate"></i>
+                        <div>
+                            <span>定向人才培养</span>
+                            <span class="item-desc">根据企业需求，定制培养专业人才</span>
+                        </div>
+                    </div>
+                    <div class="mode-item fade-in-up">
+                        <i class="fas fa-briefcase"></i>
+                        <div>
+                            <span>实习就业对接</span>
+                            <span class="item-desc">为学生和企业搭建实习与就业的桥梁</span>
+                        </div>
+                    </div>
+                    <div class="mode-item fade-in-up">
+                        <i class="fas fa-project-diagram"></i>
+                        <div>
+                            <span>项目合作开发</span>
+                            <span class="item-desc">校企联合开发研学项目，提升创新能力</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 合作企业 -->
+            <section class="enterprises" id="enterprises">
+                <h2 class="section-title">合作企业</h2>
+                <div class="enterprises-grid">
+                    <div class="enterprise-card fade-in-up">
+                        <div class="enterprise-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h3>研学旅游企业</h3>
+                        <p>提供研学规划、产品研发、导游服务等专业人才需求</p>
+                    </div>
+                    <div class="enterprise-card fade-in-up">
+                        <div class="enterprise-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>教育培训机构</h3>
+                        <p>合作开展研学课程设计、教学资源开发等项目</p>
+                    </div>
+                    <div class="enterprise-card fade-in-up">
+                        <div class="enterprise-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>旅行社</h3>
+                        <p>提供专业的地理知识支持和研学路线规划服务</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 联系我们 -->
+            <section class="contact" id="contact">
+                <h2 class="section-title">联系我们</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item fade-in-up">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h4>地址</h4>
+                            <p>陕西省西安市长安区陕西学前师范学院</p>
+                        </div>
+                        <div class="contact-item fade-in-up">
+                            <i class="fas fa-phone"></i>
+                            <h4>电话</h4>
+                            <p>13197309266<br>15330572023</p>
+                        </div>
+                        <div class="contact-item fade-in-up">
+                            <i class="fas fa-envelope"></i>
+                            <h4>邮箱</h4>
+                            <p>863159613@qq.com<br>3607513945@qq.com</p>
+                        </div>
+                        <div class="contact-item fade-in-up">
+                            <i class="fas fa-clock"></i>
+                            <h4>工作时间</h4>
+                            <p>周一至周五9：00——22：00</p>
+                        </div>
+                    </div>
+                    <div class="contact-form fade-in-up">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" placeholder="您的姓名" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="邮箱地址" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" placeholder="联系电话" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="留言内容" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">发送消息</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>研学设计</h3>
+                        <p>校企合作平台</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>快速链接</h4>
+                        <ul>
+                            <li><a href="#home">首页</a></li>
+                            <li><a href="#enterprises">合作企业</a></li>
+                            <li><a href="#contact">联系我们</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>关注我们</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-weixin"></i></a>
+                            <a href="#"><i class="fab fa-weibo"></i></a>
+                            <a href="#"><i class="fab fa-qq"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 研学设计校企合作平台. 保留所有权利.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <div id="back-to-top" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 导航栏功能
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            // 移动端菜单切换
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // 点击菜单外部关闭菜单
+            document.addEventListener('click', function(e) {
+                if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+            
+            // 平滑滚动到锚点
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offsetTop = target.offsetTop - 60; // 考虑导航栏高度
+                        document.querySelector('.container').scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // 关闭移动端菜单
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+            });
+            
+            // 返回顶部按钮
+            const backToTop = document.getElementById('back-to-top');
+            const container = document.querySelector('.container');
+            
+            container.addEventListener('scroll', function() {
+                if (container.scrollTop > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+            
+            backToTop.addEventListener('click', function() {
+                container.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 表单提交
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('感谢您的留言！我们会尽快回复您。');
+                contactForm.reset();
+            });
+            
+            // 更新屏幕宽度显示
+            function updateScreenWidth() {
+                const screenWidth = document.getElementById('screen-width');
+                screenWidth.textContent = window.innerWidth + 'px';
+            }
+            
+            updateScreenWidth();
+            window.addEventListener('resize', updateScreenWidth);
+            
+            // 触摸优化
+            let touchStartY = 0;
+            let touchEndY = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+            
+            document.addEventListener('touchend', function(e) {
+                touchEndY = e.changedTouches[0].clientY;
+                const touchDiff = touchStartY - touchEndY;
+                
+                // 向上滑动超过50px时关闭菜单
+                if (navMenu.classList.contains('active') && touchDiff > 50) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            }, { passive: true });
+            
+            // 添加滚动动画
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // 观察所有需要动画的元素
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html> 

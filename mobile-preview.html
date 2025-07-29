@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研学设计 - 移动端预览</title>
+    <link href="https://fonts.loli.net/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .mobile-container {
+            width: 375px;
+            height: 667px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand h2 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .nav-brand span {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .hamburger {
+            width: 24px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: white;
+            position: absolute;
+            transition: 0.3s;
+        }
+
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 9px; }
+        .hamburger span:nth-child(3) { top: 18px; }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+
+        .nav-menu.active {
+            display: block;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 15px 20px;
+            color: #333;
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px 24px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .section {
+            padding: 30px 20px;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4a90e2 0%, #357ab7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: #4a90e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .device-info {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <div class="device-info">
+            移动端预览 - iPhone 6/7/8 尺寸 (375×667)
+        </div>
+        
+        <!-- 导航栏 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h2>研学设计</h2>
+                <span>校企合作平台</span>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+        
+        <div class="nav-menu">
+            <a href="#home">首页</a>
+            <a href="#features">核心优势</a>
+            <a href="#cooperation">校企合作</a>
+            <a href="#enterprises">合作企业</a>
+            <a href="#contact">联系我们</a>
+        </div>
+
+        <!-- 首页 -->
+        <section class="hero" id="home">
+            <h1>研学设计</h1>
+            <p>校企合作平台</p>
+            <p>搭建研学旅游企业与地理专业人才的桥梁</p>
+            <a href="#contact" class="btn">立即合作</a>
+            <a href="#features" class="btn">了解更多</a>
+        </section>
+
+        <!-- 核心优势 -->
+        <section class="section" id="features">
+            <h2>核心优势</h2>
+            <div class="card">
+                <div class="icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3>人才推荐</h3>
+                <p>精准匹配地理专业人才，为企业提供优质人力资源</p>
+            </div>
+            <div class="card">
+                <div class="icon">
+                    <i class="fas fa-route"></i>
+                </div>
+                <h3>研学规划</h3>
+                <p>专业的研学路线设计和产品开发服务</p>
+            </div>
+            <div class="card">
+                <div class="icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>设计服务</h3>
+                <p>专业的研学路线和衍生产品设计服务</p>
+            </div>
+        </section>
+
+        <!-- 校企合作 -->
+        <section class="section" id="cooperation" style="background: #f8f9fa;">
+            <h2>校企合作</h2>
+            <div class="card">
+                <h3>定向人才培养</h3>
+                <p>根据企业需求，定制培养专业人才，实现精准对接</p>
+            </div>
+            <div class="card">
+                <h3>实习就业对接</h3>
+                <p>为学生和企业搭建实习与就业的桥梁</p>
+            </div>
+            <div class="card">
+                <h3>项目合作开发</h3>
+                <p>校企联合开发研学项目，提升创新能力</p>
+            </div>
+        </section>
+
+        <!-- 合作企业 -->
+        <section class="section" id="enterprises">
+            <h2>合作企业</h2>
+            <div class="card">
+                <div class="icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>研学旅游企业</h3>
+                <p>提供研学规划、产品研发、导游服务等专业人才需求</p>
+            </div>
+            <div class="card">
+                <div class="icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>教育培训机构</h3>
+                <p>合作开展研学课程设计、教学资源开发等项目</p>
+            </div>
+            <div class="card">
+                <div class="icon">
+                    <i class="fas fa-route"></i>
+                </div>
+                <h3>旅行社</h3>
+                <p>提供专业的地理知识支持和研学路线规划服务</p>
+            </div>
+        </section>
+
+        <!-- 联系我们 -->
+        <section class="section" id="contact" style="background: #f8f9fa;">
+            <h2>联系我们</h2>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h4>地址</h4>
+                    <p>陕西省西安市长安区陕西学前师范学院</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                    <h4>电话</h4>
+                    <p>13197309266<br>15330572023</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                    <h4>邮箱</h4>
+                    <p>863159613@qq.com<br>3607513945@qq.com</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>留言咨询</h3>
+                <form>
+                    <div class="form-group">
+                        <input type="text" placeholder="您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="邮箱地址" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="联系电话" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="留言内容" required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%; margin: 0;">发送消息</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>&copy; 2024 研学设计校企合作平台. 保留所有权利.</p>
+        </footer>
+    </div>
+
+    <script>
+        // 汉堡菜单功能
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // 点击菜单项关闭菜单
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+        
+        // 表单提交
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的留言！我们会尽快回复您。');
+            this.reset();
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
